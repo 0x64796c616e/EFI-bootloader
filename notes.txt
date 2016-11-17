@@ -1,5 +1,23 @@
 notes.txt
 
 compile with make
-/EFI-bootloader$ make
+>>>/EFI-bootloader$ make
 
+get the firmware
+>>>$ mkdir test
+>>>$ cp /usr/share/ovmf/OVMF.fd test/OVMF.fd
+>>>$ cd test
+>>>$ cp ../hello.efi hello.efi
+
+make application image
+>>>$ dd if=/dev/zero of=app.disk bs=1 count=1 seek=$(( (128 * 1024 * 1024) - 1))
+>>>$ sudo mkfs.vfat app.disk
+
+>>>$ mkdir mnt_app
+
+$ sudo mount app.disk mnt_app
+$ sudo cp hello.efi mnt_app
+$ sudo umount mnt_app
+
+run
+$ qemu-system-x86_64 -bios OVMF.fd -drive file=app.disk
