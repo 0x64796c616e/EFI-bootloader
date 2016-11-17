@@ -21,3 +21,7 @@ $ sudo umount mnt_app
 
 run
 $ qemu-system-x86_64 -bios OVMF.fd -drive file=app.disk
+
+SHELL>>> FS0:
+SHELL>>> hello.efi
+
