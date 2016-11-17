@@ -1,0 +1,5 @@
+notes.txt
+
+compile with make
+/EFI-bootloader$ make
+
